@@ -39,16 +39,13 @@ container.addEventListener("click", (e) => {
     let target = e.target;
 
     if (target.classList.contains("number")) {
-        console.log("We are in number.");
         let res = numberFunction(target.textContent);
         display.textContent = `${res}`;
         
     } else if (target.classList.contains("operand")) {
-        console.log("We are in operand.");
         operand(target.textContent);
         
     } else {
-        console.log("We are in util.");
         utilsFunction(target.textContent);
     }
 
@@ -72,18 +69,26 @@ function numberFunction(num) {
     }
 }
 
-function operand(op) {
-    console.log(op);
-    
+function operand(op) {    
     if (operator1 === "") {
         operator1 = op;
         display.textContent = ``;
     } else if (op === "=") {
         resetAfterEqual = true;
         solveProblem();
-    } else if (operator1 !== "") {
+    } else if (resetAfterEqual && answer !== "") {
+        // user can continue operations after = is inputted
+        leftNum = answer.toString();
+        operator1 = op;
+        rightNum = "";
+        resetAfterEqual = false;
+        isChainedOperator = false;
+        display.textContent = ``;
+        return;
+    }
+     else if (operator1 !== "") {
+        // start the chain of operations
         isChainedOperator = true;
-        
         solveProblem();
         leftNum = answer.toString();
         rightNum ="";
@@ -93,11 +98,28 @@ function operand(op) {
 
 
 function solveProblem() {
-    console.log(`leftNum: ${leftNum}, rightNum: ${rightNum}`);
 
-    if (operator1 === "+") {
-        answer = parseInt(leftNum) + parseInt(rightNum);   
+    num1 = parseInt(leftNum);
+    num2 = parseInt(rightNum);
+
+    switch (operator1) {
+        case "+":
+            answer = num1 + num2;
+            break;
+        case "-":
+            answer = num1 - num2;
+            break;
+        case "*":
+            answer = num1 * num2;
+            break;
+        case "/":
+            if (num2 === 0) {
+                answer = "LMAOOOOOOO you cant do that 😂🫵";
+            } else {
+                answer = num1 / num2;
+            }
     }
+
     display.textContent = `${answer}`;
 }
 
