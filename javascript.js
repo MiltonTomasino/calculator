@@ -98,9 +98,22 @@ function operand(op) {
 
 
 function solveProblem() {
+    let num1 = undefined;
+    let num2 = undefined;
 
-    num1 = parseInt(leftNum);
-    num2 = parseInt(rightNum);
+    if (leftNum.includes(".")) {
+        console.log("left num has decimal.");
+        num1 = parseFloat(leftNum)
+    } else {
+        num1 = parseInt(leftNum);
+    }
+    
+    if (rightNum.includes(".")) {
+        console.log("right num has decimal.");
+        num2 = parseFloat(rightNum);
+    } else {
+        num2 = parseInt(rightNum)
+    }
 
     switch (operator1) {
         case "+":
@@ -136,5 +149,8 @@ function utilsFunction(util) {
     if (util === "AC") {
         clearInputs();
         return;
+    } else if (util === ".") {
+        let res = numberFunction(".");
+        display.textContent = `${res}`;
     }
 }
