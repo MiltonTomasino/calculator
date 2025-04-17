@@ -61,11 +61,26 @@ function numberFunction(num) {
     }
 
     if (operator1 === "" && !isChainedOperator) {
-        return leftNum += num;
+        leftNum = numberAdjustments(num, leftNum);
+        return leftNum;
     } else if (operator1 !== "" && !isChainedOperator) {
         return rightNum += num;
     } else {
         return rightNum += num;
+    }
+}
+
+function numberAdjustments(param, currNum) {
+
+    switch (param) {
+        case "%":
+            currNum = currNum.includes(".") ? parseFloat(currNum) / 10 : parseInt(currNum) / 10;
+            return currNum.toString();
+        case "+/-":
+            currNum = currNum.includes(".") ? parseFloat(currNum) * -1 : parseInt(currNum) * -1;
+            return currNum.toString();
+        default:
+            return currNum += param;
     }
 }
 
@@ -152,5 +167,13 @@ function utilsFunction(util) {
     } else if (util === ".") {
         let res = numberFunction(".");
         display.textContent = `${res}`;
+        return;
+    } else if (util === "%") {
+        let res = numberFunction("%");
+        display.textContent = `${res}`;
+    } else if (util === "+/-") {
+        let res = numberFunction("+/-");
+        display.textContent = `${res}`;
+        return;
     }
 }
