@@ -11,7 +11,9 @@ body {
     align-items: center;
 }
 .calculator-container {
-    outline: 2px solid red;
+    /* outline: 2px solid red; */
+    border-radius: 5px;
+    background-color: #262626;
     width: 600px;
     height: 600px;
     padding: 10px;
@@ -20,7 +22,10 @@ body {
 }
 
 .display {
-    outline: 2px solid blue;
+    /* outline: 2px solid blue; */
+    border-radius: 5px;
+    margin-bottom: 5px;
+    background-color: white;
     height: 150px;
     flex-shrink: 0;
     padding: 5px;
@@ -43,8 +48,20 @@ body {
 }
 
 .btn {
-    outline: 2px solid green;
+    /* outline: 2px solid green; */
     width: 145px;
     flex-basis: 25%;
+    border-radius: 5px;
 }
 
+.util {
+    background-color: #cccccc;
+}
+
+.operand {
+    background-color: #FFA500;
+}
+
+.number {
+    background-color: #808080;
+}

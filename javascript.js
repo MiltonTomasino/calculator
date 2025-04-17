@@ -117,14 +117,12 @@ function solveProblem() {
     let num2 = undefined;
 
     if (leftNum.includes(".")) {
-        console.log("left num has decimal.");
         num1 = parseFloat(leftNum)
     } else {
         num1 = parseInt(leftNum);
     }
     
     if (rightNum.includes(".")) {
-        console.log("right num has decimal.");
         num2 = parseFloat(rightNum);
     } else {
         num2 = parseInt(rightNum)
@@ -161,19 +159,23 @@ function clearInputs() {
 }
 
 function utilsFunction(util) {
-    if (util === "AC") {
-        clearInputs();
-        return;
-    } else if (util === ".") {
-        let res = numberFunction(".");
-        display.textContent = `${res}`;
-        return;
-    } else if (util === "%") {
-        let res = numberFunction("%");
-        display.textContent = `${res}`;
-    } else if (util === "+/-") {
-        let res = numberFunction("+/-");
-        display.textContent = `${res}`;
-        return;
+    let res = undefined
+
+    switch (util) {
+        case "AC":
+            clearInputs();
+            break;
+        case ".":
+            res = numberFunction(".");
+            display.textContent = `${res}`;
+            break;
+        case "%":
+            res = numberFunction("%");
+            display.textContent = `${res}`;
+            break;
+        case "+/-":
+            res = numberFunction("+/-");
+            display.textContent = `${res}`;
+            break;
     }
 }
